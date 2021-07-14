@@ -1,7 +1,7 @@
 signature SQUARE =
 sig
   type Square
-  val Make        : bool * bool -> Square
+  val Empty       : unit -> Square
   val is_mined    : Square -> bool
   val is_revealed : Square -> bool
   val mine        : Square -> Square
@@ -10,13 +10,23 @@ end
 
 structure Square: SQUARE =
 struct
+  
   type Square = {is_mined: bool, is_revealed: bool}
-  fun Make(m : bool, r : bool) = {is_mined = m, is_revealed = r}
 
-  fun is_mined(sq : Square) = #is_mined sq
-  fun is_revealed(sq : Square) = #is_revealed sq
+  (* Construct an ab initio square. *)
+  fun Empty() = {is_mined = false, is_revealed = false}
 
-  fun mine(sq : Square) = {is_mined = true, is_revealed = is_revealed sq}
-  fun reveal(sq : Square) = {is_mined = is_mined sq, is_revealed = true}
+  (* Determine whether the square contains a mine. *)
+  fun is_mined (sq : Square) = #is_mined sq
+
+  (* Determine whether the square is revealed to the player. *)
+  fun is_revealed (sq : Square) = #is_revealed sq
+
+  (* Returns the square set as containing a mine. *)
+  fun mine (sq : Square) = {is_mined = true, is_revealed = is_revealed sq}
+
+  (* Returns the square set as revealed to the player. *)
+  fun reveal (sq : Square) = {is_mined = is_mined sq, is_revealed = true}
+
 end
 
