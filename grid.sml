@@ -23,7 +23,7 @@ struct
     end
 
   (* Get the item at the x, y coordinate. *)
-  fun get (g : 'a Grid) x y = List.nth(List.nth(g, x), y)
+  fun get (g : 'a Grid) x y = List.nth(List.nth(g, y), x)
 
   (* Returns a grid, setting the item at the x, y coordinate. *)
   fun set (g : 'a Grid) x y a =
