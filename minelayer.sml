@@ -4,7 +4,7 @@ sig
   val lay_mines : Mineable -> int -> int -> int -> Mineable
 end
 
-functor MineLayerFn (structure S : SQUARE structure G : GRID) :> MINELAYER =
+functor MineLayerFn (structure S : SQUARE structure G : GRID) : MINELAYER =
 struct
 
   type Mineable = S.Square G.Grid
@@ -40,7 +40,7 @@ struct
     end
 
   (* Adds n mines to the grid, using s1 and s2 as random seeds. *)
-  fun lay_mines (g : Mineable) n s1 s2 =
+  fun lay_mines (g : S.Square G.Grid) n s1 s2 =
     let 
       val generators = rand_generators g s1 s2
       fun lay_mine g 0 = g

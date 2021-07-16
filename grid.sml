@@ -5,7 +5,7 @@ sig
   val get   : 'a Grid -> int -> int -> 'a
   val set   : 'a Grid -> int -> int -> 'a -> 'a Grid
   val size  : 'a Grid -> int * int
-  val valid : 'a Grid -> int -> int -> bool
+  val valid : 'a Grid -> int * int -> bool
 end
 
 structure Grid: GRID =
@@ -38,7 +38,7 @@ struct
   fun size (g : 'a Grid) = (length (hd g), length g)
 
   (* Determines whether x, y is a valid coordinate inside the grid. *)
-  fun valid (g : 'a Grid) x y =
+  fun valid (g : 'a Grid) (x, y) =
     let 
       val (x_size, y_size) = size g
     in

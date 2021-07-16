@@ -1,8 +1,18 @@
-Group is
+group 
 
-$/basis.cm
-$/smlnj-lib.cm
-grid.sml
-square.sml
-minelayer.sml
+  source(-)
+  functor MineLayerFn
+  functor NeighboursFn
+  functor DisplayFn
+
+is
+
+  $/basis.cm
+  $/smlnj-lib.cm
+  grid.sml
+  square.sml
+  minelayer.sml
+  neighbours.sml
+  display.sml
+  game.sml
 
