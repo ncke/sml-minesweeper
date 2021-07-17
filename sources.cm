@@ -4,6 +4,7 @@ group
   functor MineLayerFn
   functor NeighboursFn
   functor DisplayFn
+  functor PlayerFn
 
 is
 
@@ -14,5 +15,6 @@ is
   minelayer.sml
   neighbours.sml
   display.sml
+  player.sml
   game.sml
 
