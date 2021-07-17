@@ -13,7 +13,7 @@ struct
   fun rand_generators g s1 s2 =
     let
       val gen = Random.rand(s1, s2)
-      val (x_size, y_size) = G.size(g)
+      val (x_size, y_size) = G.size g
       val x_range = Random.randRange(0, x_size - 1)
       val y_range = Random.randRange(0, y_size - 1)
     in
