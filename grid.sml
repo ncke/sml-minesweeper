@@ -1,11 +1,12 @@
 signature GRID =
 sig
   type 'a Grid
-  val Make  : int -> int -> 'a -> 'a Grid
-  val get   : 'a Grid -> int -> int -> 'a
-  val set   : 'a Grid -> int -> int -> 'a -> 'a Grid
-  val size  : 'a Grid -> int * int
-  val valid : 'a Grid -> int * int -> bool
+  val Make   : int -> int -> 'a -> 'a Grid
+  val get    : 'a Grid -> int -> int -> 'a
+  val set    : 'a Grid -> int -> int -> 'a -> 'a Grid
+  val size   : 'a Grid -> int * int
+  val valid  : 'a Grid -> int * int -> bool
+  val exists : ('a -> bool) -> 'a Grid -> bool
 end
 
 structure Grid: GRID =
@@ -44,6 +45,10 @@ struct
     in
       x >= 0 andalso y >= 0 andalso x < x_size andalso y < y_size
     end
+
+  (* Applies f to each element, returning true if encountering f is true. *)
+  fun exists f [] = false
+    | exists f (r :: rs) = if List.exists f r then true else exists f rs
 
 end
 

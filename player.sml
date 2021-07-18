@@ -9,6 +9,7 @@ struct
 
   type Playable = S.Square G.Grid
 
+ 
   (* An exception to indicate an uninterpretable string coordinate. *)
   exception BadCoordinate
 

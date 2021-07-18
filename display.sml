@@ -3,6 +3,7 @@ sig
   type Displayable
   type Counted
   val display : Displayable -> Counted -> string 
+  val is_game_over : Displayable -> bool
 end
 
 functor DisplayFn (structure S : SQUARE structure G : GRID) : DISPLAY =
@@ -10,7 +11,10 @@ struct
 
   type Displayable = S.Square G.Grid
   type Counted = int G.Grid
-
+  
+  (* Returns true if a mine has been revealed by the player. *)
+  fun is_game_over g = G.exists S.is_mined g 
+ 
   (* Returns the characters representing x-coordinates. *)
   fun top_line x_size = 
     let
