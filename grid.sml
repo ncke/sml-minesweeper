@@ -7,6 +7,7 @@ sig
   val size   : 'a Grid -> int * int
   val valid  : 'a Grid -> int * int -> bool
   val exists : ('a -> bool) -> 'a Grid -> bool
+  val count  : ('a -> bool) -> 'a Grid -> int
 end
 
 structure Grid: GRID =
@@ -50,5 +51,15 @@ struct
   fun exists f [] = false
     | exists f (r :: rs) = if List.exists f r then true else exists f rs
 
+  (* Applies f to each element, returning the count of true results. *)
+  fun count f g =
+    let
+      fun count_row row = length (List.filter f row)
+      fun inner [] = 0
+        | inner (row :: rows) = (count_row row) + (inner rows)
+    in
+      inner g
+    end
+        
 end
 

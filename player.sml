@@ -1,14 +1,13 @@
 signature PLAYER =
 sig
-  type Playable
-  val play : Playable -> string -> Playable
+  type 'a Grid
+  val play : 'a Grid -> string -> 'a Grid
 end
 
 functor PlayerFn (structure S : SQUARE structure G : GRID) : PLAYER =
 struct
 
-  type Playable = S.Square G.Grid
-
+  type 'a Grid = S.Square G.Grid
  
   (* An exception to indicate an uninterpretable string coordinate. *)
   exception BadCoordinate

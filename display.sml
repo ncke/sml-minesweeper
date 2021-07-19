@@ -1,20 +1,25 @@
 signature DISPLAY =
 sig
-  type Displayable
+  type 'a Grid
   type Counted
-  val display : Displayable -> Counted -> string 
-  val is_game_over : Displayable -> bool
+  val display : 'a Grid -> Counted -> string 
+  val is_game_over : 'a Grid -> bool
 end
 
 functor DisplayFn (structure S : SQUARE structure G : GRID) : DISPLAY =
 struct
 
-  type Displayable = S.Square G.Grid
+  type 'a Grid = S.Square G.Grid
   type Counted = int G.Grid
-  
+
   (* Returns true if a mine has been revealed by the player. *)
-  fun is_game_over g = G.exists S.is_mined g 
- 
+  fun is_game_over g = 
+    let
+      fun is_revealed_mine sq = S.is_mined sq andalso S.is_revealed sq
+    in
+      G.exists is_revealed_mine g 
+    end
+
   (* Returns the characters representing x-coordinates. *)
   fun top_line x_size = 
     let
@@ -52,7 +57,7 @@ struct
     end
 
   (* Returns the string representation of the grid. *)
-  fun display grid counts =
+  fun display_grid grid counts =
     let
       val (x_size, y_size) = G.size grid
       fun invert (x, y) = (x_size - 1 - x, y_size - 1 - y)
@@ -62,6 +67,27 @@ struct
         | raster x y s = raster (x - 1) y (s ^ (present x y))
     in
       raster (x_size - 1) (y_size - 1) (top_line x_size) 
+    end
+
+  (* Returns game statistics: total mines, mines remaining to mark. *)
+  fun statistics grid =
+    let
+      val total = G.count S.is_mined grid
+      val remaining = total - G.count S.is_marked grid
+    in
+      (total, remaining)
+    end 
+
+  (* Returns a string representation of the game state. *)
+  fun display grid counts =
+    let
+      val grid_str = display grid counts
+      val (total, remaining) = statistics grid
+      val remain_str = Int.toString(remaining)
+      val stats_str = "\n" ^ remain_str ^ " mines remainng to find.\n"
+      val game_over = if is_game_over grid then "\nGame Over!!!\n" else ""
+    in
+      grid_str ^ stats_str ^ game_over
     end
 
 end
