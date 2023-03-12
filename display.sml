@@ -81,7 +81,7 @@ struct
   (* Returns a string representation of the game state. *)
   fun display grid counts =
     let
-      val grid_str = display grid counts
+      val grid_str = display_grid grid counts
       val (total, remaining) = statistics grid
       val remain_str = Int.toString(remaining)
       val stats_str = "\n" ^ remain_str ^ " mines remainng to find.\n"
