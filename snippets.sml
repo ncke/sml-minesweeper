@@ -22,7 +22,9 @@ structure Game = GameFn(structure S=Square structure G=Grid);
 
 val gm = Game.New (10,10) 25 (100,200);
 
+Game.show gm;
 
+val g2 = Game.play gm "B2";
 
 
 

@@ -15,7 +15,7 @@ struct
   (* Converts a letter into an x-coordinate. *)
   fun letter_x letter =
     let
-      val letters = String.explode("abcdefghijklmnopqrstuvwxyz")
+      val letters = String.explode("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
       fun find n [] = raise BadCoordinate (* Expected a letter. *)
         | find n (lr :: ls) = if lr = letter then n else find (n + 1) ls
     in
@@ -32,7 +32,7 @@ struct
                          SOME i => i
                        | NONE => raise BadCoordinate (* Expected a number. *)
     in
-      (row_int, col_int)
+      (row_int, col_int - 1)
     end
 
   (* Play a human readable move on the grid. *)

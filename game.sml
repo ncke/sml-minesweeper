@@ -3,6 +3,7 @@ sig
   type Game
   val New : (int * int) -> int -> (int * int) -> Game
   val show : Game -> unit
+  val play : Game -> string -> Game
 end
 
 functor GameFn (
@@ -22,6 +23,8 @@ struct
 
   structure Display = DisplayFn (structure S = S structure G = G)
 
+  structure Player = PlayerFn (structure S = S structure G = G)
+
   fun New (x_size, y_size) mine_count (seed_1, seed_2) =
     let
       val blank_grid = G.Make x_size y_size (S.Empty())
@@ -33,6 +36,9 @@ struct
  
   fun show (game : Game) =
     print(Display.display (#grid game) (#counts game))
+
+  fun play (game : Game) move =
+    { grid = Player.play (#grid game) move, counts = (#counts game) }
 
 end
 
