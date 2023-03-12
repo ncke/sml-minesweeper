@@ -12,7 +12,7 @@ struct
   type 'a Grid = S.Square G.Grid
   type Counted = int G.Grid
 
-  (* Returns true if a mine has been revealed by the player. *)
+  (* Returns game over as true if a mine has been revealed by the player. *)
   fun is_game_over g = 
     let
       fun is_revealed_mine sq = S.is_mined sq andalso S.is_revealed sq
@@ -23,7 +23,7 @@ struct
   (* Returns the characters representing x-coordinates. *)
   fun top_line x_size = 
     let
-      val letters = "abcdefghijklmnopqrstuvwxyz"
+      val letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     in
       "   " ^ String.substring(letters, 0, x_size) ^ "\n"
     end
@@ -52,8 +52,8 @@ struct
       val count = G.get counts x y
       val gutter = if x = 0 then row_prefix y else ""
     in
-      gutter ^ revealed square count
-      (*if S.is_revealed square then revealed square count else "."*)
+      (*gutter ^ revealed square count*)
+      if S.is_revealed square then revealed square count else gutter ^ "."
     end
 
   (* Returns the string representation of the grid. *)
@@ -91,4 +91,3 @@ struct
     end
 
 end
-
