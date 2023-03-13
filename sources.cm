@@ -5,6 +5,7 @@ group
   functor NeighboursFn
   functor DisplayFn
   functor PlayerFn
+  functor SearchFn
 
 is
 
@@ -14,7 +15,9 @@ is
   square.sml
   minelayer.sml
   neighbours.sml
+  search.sml
   display.sml
   player.sml
   game.sml
+
 

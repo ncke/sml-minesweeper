@@ -37,10 +37,10 @@ struct
                                is_revealed = true,
                                is_marked = is_marked sq        }
 
-  (* Returns the square set as marked as a mine. *)
+  (* Returns the square toggling whether it is marked as a mine. *)
   fun mark sq = { is_mined = is_mined sq,
                   is_revealed = is_revealed sq,
-                  is_marked = true }
+                  is_marked = not (is_marked sq) }
 
 end
 

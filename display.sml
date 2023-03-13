@@ -45,6 +45,10 @@ struct
   fun revealed square count =
     if S.is_mined square then "X" else number count
 
+  (* Returns the string representation for an unrevealed square. *)
+  fun unrevealed square =
+    if S.is_marked square then "?" else "."
+
   (* Returns the string representation for the given coordinate. *)
   fun presentation grid counts (x, y) =
     let
@@ -52,8 +56,9 @@ struct
       val count = G.get counts x y
       val gutter = if x = 0 then row_prefix y else ""
     in
-      (*gutter ^ revealed square count*)
-      if S.is_revealed square then revealed square count else gutter ^ "."
+      if S.is_revealed square 
+      then gutter ^ revealed square count 
+      else gutter ^ unrevealed square
     end
 
   (* Returns the string representation of the grid. *)

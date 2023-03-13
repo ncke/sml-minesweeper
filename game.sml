@@ -3,7 +3,8 @@ sig
   type Game
   val New : (int * int) -> int -> (int * int) -> Game
   val show : Game -> unit
-  val play : Game -> string -> Game
+  val reveal : Game -> string -> Game
+  val mark : Game -> string -> Game
 end
 
 functor GameFn (
@@ -37,8 +38,19 @@ struct
   fun show (game : Game) =
     print(Display.display (#grid game) (#counts game))
 
-  fun play (game : Game) move =
-    { grid = Player.play (#grid game) move, counts = (#counts game) }
+  fun reveal (game : Game) move =
+    let
+      val new_grid = Player.reveal (#grid game) (#counts game) move
+    in
+      { grid = new_grid, counts = (#counts game) }
+    end
+
+  fun mark (game: Game) move =
+    let
+      val new_grid = Player.mark (#grid game) move
+    in
+      { grid = new_grid, counts = (#counts game) }
+    end
 
 end
 
