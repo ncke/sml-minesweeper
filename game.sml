@@ -39,18 +39,11 @@ struct
     print(Display.display (#grid game) (#counts game))
 
   fun reveal (game : Game) move =
-    let
-      val new_grid = Player.reveal (#grid game) (#counts game) move
-    in
-      { grid = new_grid, counts = (#counts game) }
-    end
+    { grid = Player.reveal (#grid game) (#counts game) move, 
+      counts = (#counts game) }
 
   fun mark (game: Game) move =
-    let
-      val new_grid = Player.mark (#grid game) move
-    in
-      { grid = new_grid, counts = (#counts game) }
-    end
+    { grid = Player.mark (#grid game) move, counts = (#counts game) }
 
 end
 
