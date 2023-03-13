@@ -13,20 +13,22 @@ Set up the Game structure:
 ## Starting a new game.
 To start a new game:
 `val gm = Game.New (w, h) m (s1, s2);`
-- `(w, h)` gives the width and height of the desired game.
+- `(w, h)` gives the width and height of the desired game (max 26x26).
 - `m` denotes the number of mines to populate in the grid.
-- `s1, s2` are integers used to seed random number generation.
+- `s1, s2` are arbitrary integers used to seed random number generation.
 
 Examples:
-`val gm = Game.New (10,10) 15 (100,200);`
-`val gm = Game.New (20,20) 30 (100,200);`
+- 10x10 grid, 15 mines: `val gm = Game.New (10,10) 15 (100,200);`
+- 20x20 grid, 30 mines: `val gm = Game.New (20,20) 30 (100,200);`
+- 25x25 grid, 60 mines: `val gm = Game.New (25,25) 60 (100,200);`
 
 ## Playing moves.
 The objective of the game is to mark the location of all the mines on the grid and reveal all of the unmined squares. Be careful not to reveal a mine, or it's game over!
 
 ### Viewing the grid.
-To see the current state of the grid:
 `Game.show gm;`
+To see the current state of the grid
+
 The game starts with entirely unexplored territory.
 ```
    ABCDEFGHIJ
@@ -87,9 +89,9 @@ Key to the grid:
 ```
 
 ### Marking a square as mined.
-The mark function will place a marker above a grid square to indicate that it is believed to be mined. Callling the mark function on a marked square will toggle the marker off.
 `val gm = Game.mark gm "C2";`
 `Game.show gm;`
+The mark function will place a marker above a grid square to indicate that it is believed to be mined. Callling the mark function on a marked square will toggle the marker off.
 ```
    ABCDEFGHIJ
  1 ...1 1....
