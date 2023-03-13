@@ -11,21 +11,10 @@ struct
   type Countable = S.Square G.Grid
   type Counted = int G.Grid
 
-  (* Returns a list of coordinates for adjacent squares. *)
-  fun adjacent g x y =
-    let
-      val offsets = [ (~1,~1), (0,~1), (1,~1),
-                      (~1, 0),         (1, 0),
-                      (~1, 1), (0, 1), (1, 1) ]
-      fun add (dx, dy) = (x + dx, y + dy)
-    in
-      List.filter (G.valid g) (List.map add offsets)
-    end
-
   (* Returns a list of squares adjacent to a coordinate. *)
   fun adjacent_squares g x y =
     let
-      val adjacents = adjacent g x y
+      val adjacents = G.adjacent g x y
       fun get_square (x, y) = G.get g x y
     in
       List.map get_square adjacents

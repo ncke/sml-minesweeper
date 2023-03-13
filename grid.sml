@@ -8,6 +8,7 @@ sig
   val valid  : 'a Grid -> int * int -> bool
   val exists : ('a -> bool) -> 'a Grid -> bool
   val count  : ('a -> bool) -> 'a Grid -> int
+  val adjacent : 'a Grid -> int -> int -> (int * int) list
 end
 
 structure Grid: GRID =
@@ -60,6 +61,17 @@ struct
     in
       inner g
     end
+
+  (* Returns a list of coordinates for adjacent grid locations. *)
+  fun adjacent g x y =
+    let
+      val offsets = [ (~1,~1), (0,~1), (1,~1),
+                      (~1, 0),         (1, 0),
+                      (~1, 1), (0, 1), (1, 1) ]
+      fun add (dx, dy) = (x + dx, y + dy)
+    in
+      List.filter (valid g) (List.map add offsets)
+    end  
         
 end
 
