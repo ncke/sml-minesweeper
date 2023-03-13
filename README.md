@@ -4,7 +4,6 @@ An implementation of Minesweeper in Standard ML.
 Minesweeper is written in Standard ML; it will run in the SML/NJ REPL.
 
 ## Setting up minesweeper.
-
 Compile minesweeper modules:
 `CM.make("sources.cm");`
 
@@ -12,7 +11,6 @@ Set up the Game structure:
 `structure Game = GameFn(structure S=Square structure G=Grid);`
 
 ## Starting a new game.
-
 To start a new game:
 `val gm = Game.New (w, h) m (s1, s2);`
 - `(w, h)` gives the width and height of the desired game.
@@ -24,14 +22,11 @@ Examples:
 `val gm = Game.New (20,20) 30 (100,200);`
 
 ## Playing moves.
-
 The objective of the game is to mark the location of all the mines on the grid and reveal all of the unmined squares. Be careful not to reveal a mine, or it's game over!
 
 ### Viewing the grid.
-
 To see the current state of the grid:
 `Game.show gm;`
-
 The game starts with entirely unexplored territory.
 ```
    ABCDEFGHIJ
@@ -48,7 +43,6 @@ The game starts with entirely unexplored territory.
 
 15 mines remainng to find.
 ```
-
 After a few moves, the pattern starts to emerge.
 ```
    ABCDEFGHIJ
@@ -65,7 +59,6 @@ After a few moves, the pattern starts to emerge.
 
 11 mines remainng to find.
 ```
-
 Key to the grid:
 - `.`: Unexplored squares are marked on the grid using a full stop.
 - `3`: A number indicates how many of this squares immediate neighbours are mined.
@@ -74,7 +67,6 @@ Key to the grid:
 - `X`: Shows a revealed mine 💥.
 
 ### Revealing a square.
-
 `val gm = Game.reveal gm "G5";`
 `Game.show gm;`
 
@@ -95,12 +87,9 @@ Key to the grid:
 ```
 
 ### Marking a square as mined.
-
 The mark function will place a marker above a grid square to indicate that it is believed to be mined. Callling the mark function on a marked square will toggle the marker off.
-
 `val gm = Game.mark gm "C2";`
 `Game.show gm;`
-
 ```
    ABCDEFGHIJ
  1 ...1 1....
