@@ -71,6 +71,7 @@ Key to the grid:
 - `3`: A number indicates how many of this squares immediate neighbours are mined.
 - `?`: Shows a square that you have marked as being mined.
 - ` `: Shows open sea, revealed squares that have no neighbouring mines.
+- `X`: Shows a revealed mine 💥.
 
 ### Revealing a square.
 
