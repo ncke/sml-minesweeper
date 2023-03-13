@@ -119,8 +119,4 @@ The mark function will place a marker above a grid square to indicate that it is
 
 ## Resources.
 
-SML/NJ Fellowship (2017) 'Standard ML of NJ User's Guide'. Available at: https://www.smlnj.org/doc/index.html
-
-## Resources.
-
 SML/NJ Fellowship (2017) 'Standard ML of NJ User's Guide'. Available at https://www.smlnj.org/doc/index.html
